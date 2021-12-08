@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Chief\'d Up!</string>
+    <string name="by_aaron_cohen">By Aaron Cohen</string>
+    <string name="chief_d_up">Chief\'d Up!</string>
+    <string name="create_game">Create Game</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="join_game">Join Game</string>
+    <string name="game_pin">Game Pin</string>
+</resources>
