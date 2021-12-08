@@ -132,6 +132,13 @@ public class MainActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.gameTitle);
         title.setText("Game: " + client.pin());
 
+        //set up player names
+        if (client.isHost()) {
+            TextView playerOneName = findViewById(R.id.playerOneName);
+            playerOneName.setText(client.name());
+            playerOneName.setTextColor(getResources().getColor(R.color.teal_200));
+        }
+
         Button startButton = findViewById(R.id.startGameButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
-                                //No button clicked
+                                //No button clicked, do nothing
                                 break;
                         }
                     }
