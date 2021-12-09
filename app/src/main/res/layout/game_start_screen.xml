@@ -6,71 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/playerEightName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player Eight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerSevenName"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="@+id/playerSevenName"
-        app:layout_constraintTop_toBottomOf="@+id/playerSevenName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/playerSevenName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player Seven"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerSixName"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="@+id/playerSixName"
-        app:layout_constraintTop_toBottomOf="@+id/playerSixName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/playerSixName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player Six"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerFiveName"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="@+id/playerFiveName"
-        app:layout_constraintTop_toBottomOf="@+id/playerFiveName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/playerFourName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player Four"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerThreeName"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="@+id/playerThreeName"
-        app:layout_constraintTop_toBottomOf="@+id/playerThreeName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/playerFiveName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player Five"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerFourName"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="@+id/playerFourName"
-        app:layout_constraintTop_toBottomOf="@+id/playerFourName"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="131dp"
@@ -127,24 +62,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Player One"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183" />
+        app:layout_constraintVertical_bias="0.161" />
 
     <TextView
-        android:id="@+id/playerTwoName"
+        android:id="@+id/playerFiveName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Player Two"
+        android:text="Player Five"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerOneName"
+        app:layout_constraintEnd_toEndOf="@+id/playerFourName"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/playerOneName"
-        app:layout_constraintTop_toBottomOf="@+id/playerOneName"
+        app:layout_constraintStart_toStartOf="@+id/playerFourName"
+        app:layout_constraintTop_toBottomOf="@+id/playerFourName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/playerSixName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player Six"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playerFiveName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/playerFiveName"
+        app:layout_constraintTop_toBottomOf="@+id/playerFiveName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/playerSevenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player Seven"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playerSixName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/playerSixName"
+        app:layout_constraintTop_toBottomOf="@+id/playerSixName"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -153,11 +118,80 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Player Three"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/playerTwoName"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/playerTwoName"
         app:layout_constraintTop_toBottomOf="@+id/playerTwoName"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/playerEightName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player Eight"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playerSevenName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/playerSevenName"
+        app:layout_constraintTop_toBottomOf="@+id/playerSevenName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/playerFourName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player Four"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playerThreeName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/playerThreeName"
+        app:layout_constraintTop_toBottomOf="@+id/playerThreeName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/playerTwoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player Two"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playerOneName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/playerOneName"
+        app:layout_constraintTop_toBottomOf="@+id/playerOneName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/gamePinDivider"
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/playerOneName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
+
+    <View
+        android:id="@+id/gamePinDivider2"
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/startGameButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/playerEightName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
