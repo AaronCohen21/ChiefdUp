@@ -291,4 +291,20 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_add_foreground" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/kickPlayer2Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="@drawable/ic_white_small_x_foreground"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:backgroundTint="@color/light_red"
+        app:layout_constraintBottom_toBottomOf="@+id/playerTwoName"
+        app:layout_constraintEnd_toStartOf="@+id/playerTwoName"
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="@+id/playerTwoName"
+        app:srcCompat="@drawable/ic_white_small_x_foreground" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
