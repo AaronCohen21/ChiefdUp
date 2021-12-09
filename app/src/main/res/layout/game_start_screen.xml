@@ -194,4 +194,101 @@
         app:layout_constraintStart_toEndOf="@+id/divider"
         app:layout_constraintTop_toBottomOf="@+id/playerEightName" />
 
+    <TextView
+        android:id="@+id/roundsNumberText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rounds: 3"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/drawingTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Drawing Time: 3:00"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/addRoundButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/roundsNumberText"
+        app:layout_constraintTop_toBottomOf="@+id/roundsNumberText"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/removeRoundButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="@drawable/ic_remove_foreground"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:backgroundTint="@color/purple_200"
+        app:layout_constraintBottom_toTopOf="@+id/drawingTimeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundsNumberText"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_remove_foreground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/removeTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="@drawable/ic_remove_foreground"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:backgroundTint="@color/purple_200"
+        app:layout_constraintBottom_toTopOf="@+id/drawingTimeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawingTimeText"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_remove_foreground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addRoundButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:clickable="true"
+        android:foreground="@drawable/ic_add_foreground"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:backgroundTint="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="@+id/removeRoundButton"
+        app:layout_constraintEnd_toEndOf="@+id/roundsNumberText"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toEndOf="@+id/removeRoundButton"
+        app:layout_constraintTop_toTopOf="@+id/removeRoundButton"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_add_foreground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="@drawable/ic_add_foreground"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        app:backgroundTint="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="@+id/removeRoundButton"
+        app:layout_constraintEnd_toEndOf="@+id/drawingTimeText"
+        app:layout_constraintHorizontal_bias="0.355"
+        app:layout_constraintStart_toEndOf="@+id/removeTimeButton"
+        app:layout_constraintTop_toBottomOf="@+id/drawingTimeText"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_add_foreground" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

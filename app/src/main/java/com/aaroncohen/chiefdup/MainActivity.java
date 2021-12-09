@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         mainScreen();
     }
 
+    /*
+    Screens: each function on called inflates the specific layout
+    for each screen, and then gives all views functionality
+     */
+
     public void mainScreen() {
         setContentView(R.layout.activity_main);
 
@@ -139,6 +144,48 @@ public class MainActivity extends AppCompatActivity {
             playerOneName.setTextColor(getResources().getColor(R.color.teal_200));
         }
 
+        //game property text labels
+        TextView roundsText = findViewById(R.id.roundsNumberText);
+        TextView timeText = findViewById(R.id.drawingTimeText);
+
+        //game property buttons
+        FloatingActionButton addRoundButton = findViewById(R.id.addRoundButton);
+        addRoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.addRound();
+                roundsText.setText("Rounds: " + client.getRounds());
+            }
+        });
+
+        FloatingActionButton removeRoundButton = findViewById(R.id.removeRoundButton);
+        removeRoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.removeRound();
+                roundsText.setText("Rounds: " + client.getRounds());
+            }
+        });
+
+        FloatingActionButton addTimeButton = findViewById(R.id.addTimeButton);
+        addTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.addTime();
+                timeText.setText("Drawing Time: " + client.getTime());
+            }
+        });
+
+        FloatingActionButton removeTimeButton = findViewById(R.id.removeTimeButton);
+        removeTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.removeTime();
+                timeText.setText("Drawing Time: " + client.getTime());
+            }
+        });
+
+
         Button startButton = findViewById(R.id.startGameButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,4 +232,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
 }
