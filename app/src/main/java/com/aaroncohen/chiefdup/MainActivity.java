@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //this hides the action bar, but we can probably use this to display a title if neccesarry
+        //this hides the action bar, but we can probably use this to display a title if necessary
         getSupportActionBar().hide();
 
         mainScreen();
@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //code to make the prompt to take the user to the homescreen
+                //code to make the prompt to take the user to the home screen
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -339,6 +339,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void drawScreen() {
         setContentView(R.layout.draw_screen);
+
+        DrawCanvas drawCanvas = findViewById(R.id.drawCanvas);
+
+        Button doneButton = findViewById(R.id.doneButton);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 }
