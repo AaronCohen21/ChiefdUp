@@ -66,6 +66,12 @@ public class Client {
         }
     }
 
+    /*
+    ===================
+    GETTERS AND SETTERS
+    ===================
+     */
+
     //game property getters
     public int getRounds() {
         return rounds;
@@ -106,6 +112,35 @@ public class Client {
     }
     public int pin() {
         return pin;
+    }
+
+    /*
+    ==============
+    CLIENT METHODS
+    ==============
+     */
+
+    public void disconnect() {  //this is the code that runs when the client disconnects from the game
+
+        //leaving the game is handled by MainActivity in the popup
+
+        if (this.isHost) {
+            //kick all players from game and then leave
+
+        } else {
+            //disconnect from server and then leave
+
+        }
+    }
+
+    /*
+    ============
+    HOST METHODS
+    ============
+     */
+
+    public void kickPlayer(int playerNumber) {
+
     }
 
 }

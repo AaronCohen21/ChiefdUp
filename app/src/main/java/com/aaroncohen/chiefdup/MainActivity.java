@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -39,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-    Screens: each function on called inflates the specific layout
+    =======
+    SCREENS
+    =======
+
+    each function on called inflates the specific layout
     for each screen, and then gives all views functionality
      */
 
@@ -81,11 +86,15 @@ public class MainActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //create a new host client
-                client = new Client(nameText.getText().toString(), 0, true);
+                if (!nameText.getText().toString().equals("")) {
+                    //create a new host client
+                    client = new Client(nameText.getText().toString(), 0, true);
 
-                //change screen to game start screen
-                gameStartScreen();
+                    //change screen to game start screen
+                    gameStartScreen();
+                } else {
+                    nameText.setHintTextColor(getResources().getColor(R.color.light_red));
+                }
             }
         });
     }
@@ -108,24 +117,26 @@ public class MainActivity extends AppCompatActivity {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    //try to create a new client with the provided game pin
-                    int pin;
-                    pin = Integer.parseInt(gamePin.getText().toString());
-                    client = new Client(nameText.getText().toString(), pin, false);
-                    //this is where the client should try to connect to the server, if the client can't connect, throw an exception
+                if (!nameText.getText().toString().equals("")) {
+                    try {
+                        //try to create a new client with the provided game pin
+                        int pin;
+                        pin = Integer.parseInt(gamePin.getText().toString());
+                        client = new Client(nameText.getText().toString(), pin, false);
+                        //this is where the client should try to connect to the server, if the client can't connect, throw an exception
 
 
+                        //change screen to game start screen
+                        gameStartScreen();
 
-
-                    //change screen to game start screen
-                    gameStartScreen();
-
-                } catch (NumberFormatException e){
-                    //if the provided pin isn't a number, make the editText field blank
-                    gamePin.setText("");
-                    gamePin.setHintTextColor(getResources().getColor(R.color.light_red));
-                    gamePin.setHint("Invalid Pin");
+                    } catch (NumberFormatException e) {
+                        //if the provided pin isn't a number, make the editText field blank
+                        gamePin.setText("");
+                        gamePin.setHintTextColor(getResources().getColor(R.color.light_red));
+                        gamePin.setHint("Invalid Pin");
+                    }
+                } else {
+                    nameText.setHintTextColor(getResources().getColor(R.color.light_red));
                 }
             }
         });
@@ -144,11 +155,21 @@ public class MainActivity extends AppCompatActivity {
             playerOneName.setTextColor(getResources().getColor(R.color.teal_200));
         }
 
-        //game property text labels
+        /*
+        =========================
+        game property text labels
+        =========================
+         */
+
         TextView roundsText = findViewById(R.id.roundsNumberText);
         TextView timeText = findViewById(R.id.drawingTimeText);
 
-        //game property buttons
+        /*
+        =====================
+        game property buttons
+        =====================
+         */
+
         FloatingActionButton addRoundButton = findViewById(R.id.addRoundButton);
         addRoundButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +206,80 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        ==================================
+        set up and hide kickPlayer buttons
+        ==================================
+         */
+
+        FloatingActionButton kickPlayer2Button = findViewById(R.id.kickPlayer2Button);
+        kickPlayer2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(1);
+            }
+        });
+        ((ViewGroup) kickPlayer2Button.getParent()).removeView(kickPlayer2Button);
+
+        FloatingActionButton kickPlayer3Button = findViewById(R.id.kickPlayer3Button);
+        kickPlayer3Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(2);
+            }
+        });
+        ((ViewGroup) kickPlayer3Button.getParent()).removeView(kickPlayer3Button);
+
+        FloatingActionButton kickPlayer4Button = findViewById(R.id.kickPlayer4Button);
+        kickPlayer4Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(3);
+            }
+        });
+        ((ViewGroup) kickPlayer4Button.getParent()).removeView(kickPlayer4Button);
+
+        FloatingActionButton kickPlayer5Button = findViewById(R.id.kickPlayer5Button);
+        kickPlayer5Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(4);
+            }
+        });
+        ((ViewGroup) kickPlayer5Button.getParent()).removeView(kickPlayer5Button);
+
+        FloatingActionButton kickPlayer6Button = findViewById(R.id.kickPlayer6Button);
+        kickPlayer6Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(5);
+            }
+        });
+        ((ViewGroup) kickPlayer6Button.getParent()).removeView(kickPlayer6Button);
+
+        FloatingActionButton kickPlayer7Button = findViewById(R.id.kickPlayer7Button);
+        kickPlayer7Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(6);
+            }
+        });
+        ((ViewGroup) kickPlayer7Button.getParent()).removeView(kickPlayer7Button);
+
+        FloatingActionButton kickPlayer8Button = findViewById(R.id.kickPlayer8Button);
+        kickPlayer8Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(7);
+            }
+        });
+        ((ViewGroup) kickPlayer8Button.getParent()).removeView(kickPlayer8Button);
+
+        /*
+        ============================
+        other buttons and misc. code
+        ============================
+         */
 
         Button startButton = findViewById(R.id.startGameButton);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -209,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
                                 //Yes button clicked
 
                                 //disconnect the client
-
+                                client.disconnect();
 
                                 //go to main menu
                                 mainScreen();
@@ -223,12 +318,18 @@ public class MainActivity extends AppCompatActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Exit To Main Menu?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+                builder.setMessage("Exit to main menu?" + (client.isHost() ? "\nThis will end the game for everyone else" : "")).setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
             }
         });
 
         if (!client.isHost()) {
             //remove host elements from ViewGroup
+
+            //config elements
+            ((ViewGroup) addRoundButton.getParent()).removeView(addRoundButton);
+            ((ViewGroup) removeRoundButton.getParent()).removeView(removeRoundButton);
+            ((ViewGroup) addTimeButton.getParent()).removeView(addTimeButton);
+            ((ViewGroup) removeTimeButton.getParent()).removeView(removeTimeButton);
 
         }
     }
