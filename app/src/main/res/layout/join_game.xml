@@ -67,6 +67,7 @@
         android:hint="@string/game_pin"
         android:inputType="number"
         android:maxLength="5"
+        android:numeric="integer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"

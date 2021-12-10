@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //code to start the game
-
+                drawScreen();
 
             }
         });
@@ -331,7 +331,14 @@ public class MainActivity extends AppCompatActivity {
             ((ViewGroup) addTimeButton.getParent()).removeView(addTimeButton);
             ((ViewGroup) removeTimeButton.getParent()).removeView(removeTimeButton);
 
+            //start game section
+            ((ViewGroup) startButton.getParent()).removeView(startButton);
+            ((ViewGroup) findViewById(R.id.gamePinDivider2).getParent()).removeView(findViewById(R.id.gamePinDivider2));
         }
+    }
+
+    public void drawScreen() {
+        setContentView(R.layout.draw_screen);
     }
 
 }
