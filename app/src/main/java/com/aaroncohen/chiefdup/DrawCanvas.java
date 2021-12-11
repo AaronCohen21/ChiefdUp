@@ -25,6 +25,8 @@ public class DrawCanvas extends View {
     private Paint paint;
     private Path path;
 
+    private boolean pathHasContent;
+
     //used to store old lines with their specific paths and paints
     class OldLine {
         public Paint paint;
@@ -78,10 +80,12 @@ public class DrawCanvas extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                pathHasContent = false;
                 path.moveTo(xPos, yPos);
                 return true;
 
             case MotionEvent.ACTION_MOVE:
+                pathHasContent = true;
                 path.lineTo(xPos, yPos);
                 break;
 
@@ -91,29 +95,32 @@ public class DrawCanvas extends View {
                 this allows there to be an undo() function
                  */
 
-                //preserve color and width
-                @ColorInt int color = paint.getColor();
-                float width = paint.getStrokeWidth();
+                if (pathHasContent) {
+                    //preserve color and width
+                    @ColorInt int color = paint.getColor();
+                    float width = paint.getStrokeWidth();
 
-                //store the settings for the previous line
-                oldLines.add(new OldLine(path, paint));
+                    //store the settings for the previous line
+                    oldLines.add(new OldLine(path, paint));
 
-                //reset path and paint as to not damage old lines
-                path = new Path();
-                paint = new Paint();
-                paint.setAntiAlias(true);
-                paint.setStrokeJoin(Paint.Join.ROUND);
-                paint.setStrokeCap(Paint.Cap.ROUND);
-                paint.setStyle(Paint.Style.STROKE);
-                paint.setStrokeWidth(width);
+                    //reset path and paint as to not damage old lines
+                    path = new Path();
+                    paint = new Paint();
+                    paint.setAntiAlias(true);
+                    paint.setStrokeJoin(Paint.Join.ROUND);
+                    paint.setStrokeCap(Paint.Cap.ROUND);
+                    paint.setStyle(Paint.Style.STROKE);
+                    paint.setStrokeWidth(width);
 
-                //restore current settings
-                paint.setColor(color);
-                paint.setStrokeWidth(width);
+                    //restore current settings
+                    paint.setColor(color);
+                    paint.setStrokeWidth(width);
+                }
                 break;
 
             default:
                 return false;
+
         }
 
         invalidate();

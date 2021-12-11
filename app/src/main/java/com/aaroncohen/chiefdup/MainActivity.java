@@ -378,6 +378,37 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        FloatingActionButton homeButton = findViewById(R.id.drawScreenHomeButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //code to make the prompt to take the user to the home screen
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+
+                                //disconnect the client
+                                client.disconnect();
+
+                                //go to main menu
+                                mainScreen();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked, do nothing
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Exit to main menu?" + (client.isHost() ? "\nThis will end the game for everyone else" : "")).setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+            }
+        });
     }
 
 }
