@@ -47,7 +47,7 @@ public class DrawCanvas extends View {
         paint.setStyle(Paint.Style.STROKE);
 
         paint.setColor(getResources().getColor(R.color.black));
-        paint.setStrokeWidth(50f);
+        paint.setStrokeWidth(25f);
 
         path = new Path();
         oldLines = new ArrayList<>();
@@ -139,17 +139,20 @@ public class DrawCanvas extends View {
         //preserve width
         float width = paint.getStrokeWidth();
 
-        //store the settings for the previous line
-        oldLines.add(new OldLine(path, paint));
+        //test if there is a path to reset, if so, reset
+        if (!path.isEmpty()) {
+            //store the settings for the previous line
+            oldLines.add(new OldLine(path, paint));
 
-        //reset path and paint as to not damage old lines
-        path = new Path();
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(width);
+            //reset path and paint as to not damage old lines
+            path = new Path();
+            paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setStrokeJoin(Paint.Join.ROUND);
+            paint.setStrokeCap(Paint.Cap.ROUND);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(width);
+        }
 
         //change paint color
         paint.setColor(color);
@@ -160,17 +163,20 @@ public class DrawCanvas extends View {
         //preserve color
         @ColorInt int color = paint.getColor();
 
-        //store the settings for the previous line
-        oldLines.add(new OldLine(path, paint));
+        //test if there is a path to reset, if so, reset
+        if (!path.isEmpty()) {
+            //store the settings for the previous line
+            oldLines.add(new OldLine(path, paint));
 
-        //reset path and paint as to not damage old lines
-        path = new Path();
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(color);
+            //reset path and paint as to not damage old lines
+            path = new Path();
+            paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setStrokeJoin(Paint.Join.ROUND);
+            paint.setStrokeCap(Paint.Cap.ROUND);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(color);
+        }
 
         //change paint color
         paint.setStrokeWidth(width);

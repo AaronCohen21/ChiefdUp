@@ -13,9 +13,10 @@
         android:text="Done"
         app:layout_constraintBottom_toBottomOf="@+id/ceoName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ceoName" />
+        app:layout_constraintTop_toTopOf="@+id/ceoName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ceoName"
@@ -81,5 +82,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.052" />
+
+    <SeekBar
+        android:id="@+id/sizeBar"
+        android:layout_width="205dp"
+        android:layout_height="32dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/undoButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.838" />
+
+    <com.aaroncohen.chiefdup.PaintPreview
+        android:id="@+id/paintPreview"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sizeBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/sizeBar"
+        app:layout_constraintTop_toTopOf="@+id/sizeBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

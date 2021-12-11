@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -341,6 +342,26 @@ public class MainActivity extends AppCompatActivity {
 
         EditText ceoName = findViewById(R.id.ceoName);
         DrawCanvas drawCanvas = findViewById(R.id.drawCanvas);
+        PaintPreview paintPreview = findViewById(R.id.paintPreview);
+
+        SeekBar sizeBar = findViewById(R.id.sizeBar);
+        sizeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                drawCanvas.setDrawStroke((float) progress);
+                paintPreview.setWidth((progress <= 5) ? 5f : ((float) progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         FloatingActionButton undoButton = findViewById(R.id.undoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
