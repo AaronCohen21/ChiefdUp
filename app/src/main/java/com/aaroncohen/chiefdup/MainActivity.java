@@ -287,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //code to start the game
                 drawScreen();
-
             }
         });
 
@@ -340,7 +339,16 @@ public class MainActivity extends AppCompatActivity {
     public void drawScreen() {
         setContentView(R.layout.draw_screen);
 
+        EditText ceoName = findViewById(R.id.ceoName);
         DrawCanvas drawCanvas = findViewById(R.id.drawCanvas);
+
+        FloatingActionButton undoButton = findViewById(R.id.undoButton);
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawCanvas.undo();
+            }
+        });
 
         Button doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {

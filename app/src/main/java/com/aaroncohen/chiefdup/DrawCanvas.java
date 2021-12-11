@@ -35,7 +35,6 @@ public class DrawCanvas extends View {
             this.path = path;
         }
     }
-
     private ArrayList<OldLine> oldLines;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,10 +66,11 @@ public class DrawCanvas extends View {
         for (OldLine oldLine : oldLines) {
             canvas.drawPath(oldLine.path, oldLine.paint);
         }
-
+        //draw current path
         canvas.drawPath(path, paint);
     }
 
+    //handles all the code for drawing to the screen
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float xPos = event.getX();
@@ -86,7 +86,30 @@ public class DrawCanvas extends View {
                 break;
 
             case MotionEvent.ACTION_UP:
-                //do nothing
+                /*
+                this code stores the line drawn and resets the paint and path
+                this allows there to be an undo() function
+                 */
+
+                //preserve color and width
+                @ColorInt int color = paint.getColor();
+                float width = paint.getStrokeWidth();
+
+                //store the settings for the previous line
+                oldLines.add(new OldLine(path, paint));
+
+                //reset path and paint as to not damage old lines
+                path = new Path();
+                paint = new Paint();
+                paint.setAntiAlias(true);
+                paint.setStrokeJoin(Paint.Join.ROUND);
+                paint.setStrokeCap(Paint.Cap.ROUND);
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(width);
+
+                //restore current settings
+                paint.setColor(color);
+                paint.setStrokeWidth(width);
                 break;
 
             default:
@@ -104,29 +127,11 @@ public class DrawCanvas extends View {
     ==============
      */
 
-    /**
-     * Original code from: https://stackoverflow.com/questions/5536066/convert-view-to-bitmap-on-android
-     * the code has been modified to return a bitmap of the instantiated View
-     *
-     * @return a bitmap of the DrawCanvas object
-     */
-    public Bitmap getBitmap() {
-        //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(),Bitmap.Config.ARGB_8888);
-        //Bind a canvas to it
-        Canvas canvas = new Canvas(returnedBitmap);
-        //Get the view's background
-        Drawable bgDrawable = this.getBackground();
-        if (bgDrawable!=null)
-            //has background drawable, then draw it on the canvas
-            bgDrawable.draw(canvas);
-        else
-            //does not have background drawable, then draw white background on the canvas
-            canvas.drawColor(Color.WHITE);
-        // draw the view on the canvas
-        this.draw(canvas);
-        //return the bitmap
-        return returnedBitmap;
+    public void undo() {
+        if (oldLines.size() > 0) {
+            oldLines.remove(oldLines.size() - 1);
+            invalidate();
+        }
     }
 
     //use to change draw color of the DrawCanvas
@@ -169,5 +174,30 @@ public class DrawCanvas extends View {
 
         //change paint color
         paint.setStrokeWidth(width);
+    }
+
+    /**
+     * Original code from: https://stackoverflow.com/questions/5536066/convert-view-to-bitmap-on-android
+     * the code has been modified to return a bitmap of the instantiated View
+     *
+     * @return a bitmap of the DrawCanvas object
+     */
+    public Bitmap getBitmap() {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable = this.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        this.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
     }
 }

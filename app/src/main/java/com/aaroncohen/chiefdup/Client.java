@@ -86,7 +86,7 @@ public class Client {
             copyOfTime -= 60;
         }
         //copyOfTime should now be equal to seconds
-        return mins + ":" + ((copyOfTime == 0) ? "00" : copyOfTime);
+        return mins + ":" + String.format("%02d", copyOfTime);
     }
 
     //game property setters
