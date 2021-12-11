@@ -35,7 +35,8 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ceoName"
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
+        android:focusable="auto"
         android:hint="Name Your CEO"
         android:maxLength="20"
         android:selectAllOnFocus="true"
@@ -43,8 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/drawCanvas"
         app:layout_constraintStart_toStartOf="@+id/drawCanvas"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintTop_toBottomOf="@+id/drawCanvas" />
 
     <TextView
         android:id="@+id/ceoText"
@@ -53,17 +53,16 @@
         android:text="The CEO Of ________"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/drawCanvas"
         app:layout_constraintEnd_toEndOf="@+id/drawCanvas"
         app:layout_constraintStart_toStartOf="@+id/drawCanvas"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04000002" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.aaroncohen.chiefdup.DrawCanvas
         android:id="@+id/drawCanvas"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="@drawable/border"
+        android:foreground="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.037"
@@ -82,7 +81,8 @@
         app:layout_constraintStart_toEndOf="@+id/drawCanvas"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.157"
-        app:srcCompat="@drawable/ic_undo_foreground" />
+        app:srcCompat="@drawable/ic_undo_foreground"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/timeLeft"
@@ -120,5 +120,140 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/sizeBar"
         app:layout_constraintTop_toTopOf="@+id/sizeBar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/redButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/sizeBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/undoButton"
+        app:layout_constraintTop_toBottomOf="@+id/undoButton"
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/blueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="@color/blue"
+        app:layout_constraintBottom_toTopOf="@+id/sizeBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/undoButton"
+        app:layout_constraintTop_toBottomOf="@+id/redButton"
+        app:layout_constraintVertical_bias="0.3"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/purpleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/purple"
+        app:layout_constraintBottom_toBottomOf="@+id/blueButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/blueButton"
+        app:layout_constraintTop_toTopOf="@+id/blueButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/brownButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/brown"
+        app:layout_constraintBottom_toBottomOf="@+id/blueButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/purpleButton"
+        app:layout_constraintTop_toTopOf="@+id/blueButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/blackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        android:foreground="@drawable/ic_circle_border_foreground"
+        app:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/blueButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/brownButton"
+        app:layout_constraintTop_toTopOf="@+id/blueButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/orangeButon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintBottom_toBottomOf="@+id/redButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/redButton"
+        app:layout_constraintTop_toTopOf="@+id/redButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/yellowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="@+id/redButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/orangeButon"
+        app:layout_constraintTop_toTopOf="@+id/redButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/greenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="@+id/redButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/yellowButton"
+        app:layout_constraintTop_toTopOf="@+id/redButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/eraserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/eraser_pink"
+        app:layout_constraintBottom_toBottomOf="@+id/undoButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/undoButton"
+        app:layout_constraintTop_toTopOf="@+id/undoButton"
+        app:srcCompat="@drawable/ic_eraser"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

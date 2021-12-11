@@ -21,7 +21,7 @@ public class PaintPreview extends View {
 
         paint = new Paint();
         paint.setColor(getResources().getColor(R.color.black));
-        paint.setStrokeWidth(width);
+        paint.setStrokeWidth(5f);
     }
 
     @Override
@@ -33,12 +33,18 @@ public class PaintPreview extends View {
     //methods to interface with the view
     public void setWidth(float width) {
         this.width = width;
-        paint.setStrokeWidth(width);
         invalidate();
     }
 
     public void setColor(@ColorInt int color) {
         paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        invalidate();
+    }
+
+    public void setEraserColor() {
+        paint.setColor(getResources().getColor(R.color.black));
+        paint.setStyle(Paint.Style.STROKE);
         invalidate();
     }
 }

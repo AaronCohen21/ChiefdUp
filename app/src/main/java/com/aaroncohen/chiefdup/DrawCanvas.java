@@ -202,12 +202,6 @@ public class DrawCanvas extends View {
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
         Drawable bgDrawable = this.getBackground();
-        if (bgDrawable!=null)
-            //has background drawable, then draw it on the canvas
-            bgDrawable.draw(canvas);
-        else
-            //does not have background drawable, then draw white background on the canvas
-            canvas.drawColor(Color.WHITE);
         // draw the view on the canvas
         this.draw(canvas);
         //return the bitmap

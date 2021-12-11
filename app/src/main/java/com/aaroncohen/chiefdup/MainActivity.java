@@ -2,11 +2,13 @@ package com.aaroncohen.chiefdup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -362,6 +365,67 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //color buttons
+        ArrayList<FloatingActionButton> colorButtons = new ArrayList<>();
+
+        //get color buttons and add buttons to ArrayList
+        FloatingActionButton redButton = findViewById(R.id.redButton);
+        colorButtons.add(redButton);
+
+        FloatingActionButton orangeButton = findViewById(R.id.orangeButon);
+        colorButtons.add(orangeButton);
+
+        FloatingActionButton yellowButton = findViewById(R.id.yellowButton);
+        colorButtons.add(yellowButton);
+
+        FloatingActionButton greenButton = findViewById(R.id.greenButton);
+        colorButtons.add(greenButton);
+
+        FloatingActionButton blueButton = findViewById(R.id.blueButton);
+        colorButtons.add(blueButton);
+
+        FloatingActionButton purpleButton = findViewById(R.id.purpleButton);
+        colorButtons.add(purpleButton);
+
+        FloatingActionButton brownButton = findViewById(R.id.brownButton);
+        colorButtons.add(brownButton);
+
+        FloatingActionButton blackButton = findViewById(R.id.blackButton);
+        colorButtons.add(blackButton);
+
+        FloatingActionButton eraserButton = findViewById(R.id.eraserButton);
+        colorButtons.add(eraserButton);
+
+        //add functionality to all buttons
+        for (FloatingActionButton button : colorButtons) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View v) {
+
+                    //remove outline from all buttons
+                    for (FloatingActionButton button : colorButtons) {
+                        button.setForeground(null);
+                    }
+
+                    //test to see if the eraser was clicked
+                    if (!button.equals(eraserButton)) { //check to make sure the eraser is not chosen
+                        drawCanvas.setDrawColor(button.getBackgroundTintList().getDefaultColor());
+                        paintPreview.setColor(button.getBackgroundTintList().getDefaultColor());
+                        //put outline on the clicked button
+                        button.setForeground(getResources().getDrawable(R.drawable.ic_circle_border_foreground));
+
+                    } else {    //if the eraser is chosen set draw color to erase
+                        drawCanvas.setDrawColor(getResources().getColor(R.color.white));
+                        paintPreview.setEraserColor();
+
+                        //put outline on the clicked button
+                        button.setForeground(getResources().getDrawable(R.drawable.ic_circle_border_teal_foreground));
+                    }
+                }
+            });
+        }
 
         FloatingActionButton undoButton = findViewById(R.id.undoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
