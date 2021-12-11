@@ -65,10 +65,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintVertical_bias="0.161" />
 
     <TextView
         android:id="@+id/playerFiveName"
@@ -85,17 +85,17 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/playerThreeName"
+        android:id="@+id/playerSixName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Player Three"
+        android:text="Player Six"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerTwoName"
+        app:layout_constraintEnd_toEndOf="@+id/playerFiveName"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/playerTwoName"
-        app:layout_constraintTop_toBottomOf="@+id/playerTwoName"
+        app:layout_constraintStart_toStartOf="@+id/playerFiveName"
+        app:layout_constraintTop_toBottomOf="@+id/playerFiveName"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -110,6 +110,20 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/playerSixName"
         app:layout_constraintTop_toBottomOf="@+id/playerSixName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/playerThreeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player Three"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/playerTwoName"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/playerTwoName"
+        app:layout_constraintTop_toBottomOf="@+id/playerTwoName"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -152,20 +166,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/playerOneName"
         app:layout_constraintTop_toBottomOf="@+id/playerOneName"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/playerSixName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player Six"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/playerFiveName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/playerFiveName"
-        app:layout_constraintTop_toBottomOf="@+id/playerFiveName"
         app:layout_constraintVertical_bias="0.0" />
 
     <View
@@ -301,14 +301,14 @@
         android:scaleY="0.4"
         app:backgroundTint="@color/light_red"
         app:layout_constraintBottom_toBottomOf="@+id/playerTwoName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/playerTwoName"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toEndOf="@+id/divider"
         app:layout_constraintTop_toTopOf="@+id/playerTwoName"
         app:srcCompat="@drawable/ic_white_small_x_foreground" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/kickPlayer6Button"
+        android:id="@+id/kickPlayer7Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -316,11 +316,27 @@
         android:scaleX="0.4"
         android:scaleY="0.4"
         app:backgroundTint="@color/light_red"
-        app:layout_constraintBottom_toBottomOf="@+id/playerSixName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="@+id/playerSevenName"
+        app:layout_constraintEnd_toStartOf="@+id/playerSevenName"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toTopOf="@+id/playerSixName"
+        app:layout_constraintTop_toTopOf="@+id/playerSevenName"
+        app:srcCompat="@drawable/ic_white_small_x_foreground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/kickPlayer5Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="@drawable/ic_white_small_x_foreground"
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        app:backgroundTint="@color/light_red"
+        app:layout_constraintBottom_toBottomOf="@+id/playerFiveName"
+        app:layout_constraintEnd_toStartOf="@+id/playerFiveName"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="@+id/playerFiveName"
         app:srcCompat="@drawable/ic_white_small_x_foreground" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -333,8 +349,8 @@
         android:scaleY="0.4"
         app:backgroundTint="@color/light_red"
         app:layout_constraintBottom_toBottomOf="@+id/playerEightName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/playerEightName"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toEndOf="@+id/divider"
         app:layout_constraintTop_toTopOf="@+id/playerEightName"
         app:srcCompat="@drawable/ic_white_small_x_foreground" />
@@ -349,10 +365,26 @@
         android:scaleY="0.4"
         app:backgroundTint="@color/light_red"
         app:layout_constraintBottom_toBottomOf="@+id/playerFourName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/playerFourName"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toEndOf="@+id/divider"
         app:layout_constraintTop_toTopOf="@+id/playerFourName"
+        app:srcCompat="@drawable/ic_white_small_x_foreground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/kickPlayer6Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="@drawable/ic_white_small_x_foreground"
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        app:backgroundTint="@color/light_red"
+        app:layout_constraintBottom_toBottomOf="@+id/playerSixName"
+        app:layout_constraintEnd_toStartOf="@+id/playerSixName"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="@+id/playerSixName"
         app:srcCompat="@drawable/ic_white_small_x_foreground" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -365,42 +397,10 @@
         android:scaleY="0.4"
         app:backgroundTint="@color/light_red"
         app:layout_constraintBottom_toBottomOf="@+id/playerThreeName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/playerThreeName"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toEndOf="@+id/divider"
         app:layout_constraintTop_toTopOf="@+id/playerThreeName"
-        app:srcCompat="@drawable/ic_white_small_x_foreground" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/kickPlayer5Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:foreground="@drawable/ic_white_small_x_foreground"
-        android:scaleX="0.4"
-        android:scaleY="0.4"
-        app:backgroundTint="@color/light_red"
-        app:layout_constraintBottom_toBottomOf="@+id/playerFiveName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toTopOf="@+id/playerFiveName"
-        app:srcCompat="@drawable/ic_white_small_x_foreground" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/kickPlayer7Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:foreground="@drawable/ic_white_small_x_foreground"
-        android:scaleX="0.4"
-        android:scaleY="0.4"
-        app:backgroundTint="@color/light_red"
-        app:layout_constraintBottom_toBottomOf="@+id/playerSevenName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toTopOf="@+id/playerSevenName"
         app:srcCompat="@drawable/ic_white_small_x_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
