@@ -27,6 +27,7 @@ public class DrawCanvas extends View {
     private Path path;
 
     private boolean pathHasContent;
+    public boolean locked;
 
     private EditText ceoName;
 
@@ -45,6 +46,8 @@ public class DrawCanvas extends View {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public DrawCanvas(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        locked = false;
+
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStrokeJoin(Paint.Join.ROUND);
@@ -90,8 +93,10 @@ public class DrawCanvas extends View {
                 return true;
 
             case MotionEvent.ACTION_MOVE:
-                pathHasContent = true;
-                path.lineTo(xPos, yPos);
+                if (!locked) {
+                    pathHasContent = true;
+                    path.lineTo(xPos, yPos);
+                }
                 break;
 
             case MotionEvent.ACTION_UP:

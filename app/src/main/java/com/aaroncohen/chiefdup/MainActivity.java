@@ -94,15 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
         EditText nameText = findViewById(R.id.editText);
 
+        MainActivity activity = this;
+
         Button createButton = findViewById(R.id.createButton2);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!nameText.getText().toString().equals("")) {
                     //create a new host client
-                    client = new Client(nameText.getText().toString(), 0, true);
+                    client = new Client(activity, nameText.getText().toString(), 0, true);
 
-                    //change screen to game start screen
+                    //change screen to game start screen and start the server
+                    client.start();
                     gameStartScreen();
                 } else {
                     nameText.setHintTextColor(getResources().getColor(R.color.light_red));
@@ -125,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         EditText nameText = findViewById(R.id.nameField);
         EditText gamePin = findViewById(R.id.gamePin);
 
+        MainActivity activity = this;
+
         Button joinButton = findViewById(R.id.createButton3);
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,13 +139,10 @@ public class MainActivity extends AppCompatActivity {
                         //try to create a new client with the provided game pin
                         int pin;
                         pin = Integer.parseInt(gamePin.getText().toString());
-                        client = new Client(nameText.getText().toString(), pin, false);
+                        client = new Client(activity, nameText.getText().toString(), pin, false);
                         //this is where the client should try to connect to the server, if the client can't connect, throw an exception
-
-
-                        //change screen to game start screen
-                        gameStartScreen();
-
+                        client.start();
+                        //the client will then change the screen to game_start_screen
                     } catch (NumberFormatException e) {
                         //if the provided pin isn't a number, make the editText field blank
                         gamePin.setText("");
@@ -500,6 +502,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ceoName.clearFocus();
+
+                //if there is no name for the ceo
+                if (ceoName.getText().toString().equals("")) ceoName.setText("...");
+
+                //lock the drawing elements
+                drawCanvas.locked = true;
+                ceoName.setFocusable(false);
+                ceoName.setEnabled(false);
+
+                //remove functionality from the undo button
+                undoButton.setOnClickListener(null);
 
                 //get a bitmap of the drawCanvas
                 Bitmap drawScreenBitmap = drawCanvas.getBitmap();

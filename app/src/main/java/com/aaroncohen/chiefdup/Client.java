@@ -2,19 +2,24 @@ package com.aaroncohen.chiefdup;
 
 import android.os.AsyncTask;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 
-public class Client {
+public class Client extends Thread {
 
     private String name;
     private int pin, rounds, time;
     private boolean isHost;
 
-    public Client(String name, int pin, boolean isHost) {
+    MainActivity activity;
+
+    public Client(MainActivity mainActivity, String name, int pin, boolean isHost) {
         //client properties
         this.name = name;
         this.isHost = isHost;
+        activity = mainActivity;
 
         //game properties
         rounds = 3;
@@ -143,4 +148,93 @@ public class Client {
 
     }
 
+    /*
+    ========
+    NET CODE
+    ========
+     */
+
+    @Override
+    public void run() {
+        if (this.isHost) {
+            //start the server and create all 7 player sockets
+            class PlayerSocket implements Runnable {
+
+                public ServerSocket socket;
+                public Socket client;
+
+                DataInputStream dataIn;
+                DataOutputStream dataOut;
+
+                @Override
+                public void run() {
+                    try {
+                        //create the socket
+                        socket = new ServerSocket(pin);
+                        client = socket.accept();
+
+                        DataInputStream dataIn = new DataInputStream(client.getInputStream());
+                        DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
+
+                        boolean serverRunning = true;
+
+                        while (serverRunning) {
+                            byte protocol = dataIn.readByte();
+                            switch (protocol) {
+                                case 0:
+                                    //disconnect the client
+                                    serverRunning = false;
+                                    break;
+                                case 1:
+                                    //send the client's name
+
+                            }
+                        }
+
+                        //close the server tgread
+                        dataIn.close();
+                        socket.close();
+                        client.close();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } else {
+            //connect to the server as the client
+            try {
+                Socket server = new Socket("localhost", pin);
+
+                DataInputStream dataIn = new DataInputStream(server.getInputStream());
+                DataOutputStream dataOut = new DataOutputStream(server.getOutputStream());
+
+                String in = "", out = "";
+
+                boolean clientRunning = true;
+
+                while (clientRunning) {
+                    byte protocol = dataIn.readByte();
+
+                    switch (protocol) {
+                        case 0:
+                            //kick the client
+                            clientRunning = false;
+                            break;
+                        case 1:
+                            //move to game_start_screen with array of playerNames
+                            activity.gameStartScreen();
+                            break;
+                    }
+                }
+
+                //close the client
+                dataOut.close();
+                server.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
