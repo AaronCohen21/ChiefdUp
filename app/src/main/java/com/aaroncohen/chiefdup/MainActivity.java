@@ -5,19 +5,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.dynamicanimation.animation.FlingAnimation;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -345,7 +353,16 @@ public class MainActivity extends AppCompatActivity {
 
         EditText ceoName = findViewById(R.id.ceoName);
         DrawCanvas drawCanvas = findViewById(R.id.drawCanvas);
+        drawCanvas.setCEOName(ceoName);
+        drawCanvas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ceoName.clearFocus();
+            }
+        });
         PaintPreview paintPreview = findViewById(R.id.paintPreview);
+
+        ImageView rivalPreview = findViewById(R.id.rivalPreview);
 
         SeekBar sizeBar = findViewById(R.id.sizeBar);
         sizeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -357,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                ceoName.clearFocus();
             }
 
             @Override
@@ -403,6 +420,7 @@ public class MainActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public void onClick(View v) {
+                    ceoName.clearFocus();
 
                     //remove outline from all buttons
                     for (FloatingActionButton button : colorButtons) {
@@ -431,7 +449,49 @@ public class MainActivity extends AppCompatActivity {
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ceoName.clearFocus();
                 drawCanvas.undo();
+            }
+        });
+
+        //set up FlingAnimation for rivalPreview
+        ViewCompat.setTranslationZ(rivalPreview, 90f);  //bring view to front
+
+        final boolean[] flingLeft = {false};    //this boolean switches each fling to determine the fling direction
+        final boolean[] canFling = {true};  //this boolean is only true when the view is not being animated
+
+        //this is a calculated velocity that remains constant across all devices
+        float pixelPerSecond = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 945,
+                getResources().getDisplayMetrics());
+
+        //set up the fling with correct velocity
+        FlingAnimation fling = new FlingAnimation(rivalPreview, DynamicAnimation.X).setStartVelocity(pixelPerSecond);
+
+        //tell the fling to set the canFling boolean back to true when the animation is finished
+        fling.addEndListener(new DynamicAnimation.OnAnimationEndListener() {
+            @Override
+            public void onAnimationEnd(DynamicAnimation animation, boolean canceled, float value, float velocity) {
+                canFling[0] = true;
+            }
+        });
+
+        //when the view is clicked, start the animation if the animation can be started
+        rivalPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ceoName.clearFocus();
+
+                if (canFling[0]) {
+                    canFling[0] = false;
+
+                    //set up fling direction and velocity for next fling
+                    int flingVelocity = (int) (flingLeft[0] ? pixelPerSecond : -pixelPerSecond);
+                    flingLeft[0] = !flingLeft[0];
+
+                    //start the fling and apply the direction and velocity for the next fling
+                    fling.start();
+                    fling.setStartVelocity(flingVelocity);
+                }
             }
         });
 
@@ -439,7 +499,11 @@ public class MainActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ceoName.clearFocus();
 
+                //get a bitmap of the drawCanvas
+                Bitmap drawScreenBitmap = drawCanvas.getBitmap();
+                rivalPreview.setImageBitmap(drawScreenBitmap);
             }
         });
 
@@ -447,6 +511,8 @@ public class MainActivity extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ceoName.clearFocus();
+
                 //code to make the prompt to take the user to the home screen
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override

@@ -13,6 +13,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
@@ -26,6 +27,8 @@ public class DrawCanvas extends View {
     private Path path;
 
     private boolean pathHasContent;
+
+    private EditText ceoName;
 
     //used to store old lines with their specific paths and paints
     class OldLine {
@@ -80,6 +83,8 @@ public class DrawCanvas extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                ceoName.clearFocus();
+
                 pathHasContent = false;
                 path.moveTo(xPos, yPos);
                 return true;
@@ -206,5 +211,9 @@ public class DrawCanvas extends View {
         this.draw(canvas);
         //return the bitmap
         return returnedBitmap;
+    }
+
+    public void setCEOName(EditText ceoName) {
+        this.ceoName = ceoName;
     }
 }

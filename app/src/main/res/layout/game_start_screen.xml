@@ -185,14 +185,14 @@
         android:id="@+id/gamePinDivider2"
         android:layout_width="250dp"
         android:layout_height="1dp"
-        android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/startGameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/playerEightName" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/roundsNumberText"
