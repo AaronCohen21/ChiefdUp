@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Client client;
 
+    public Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,9 +143,18 @@ public class MainActivity extends AppCompatActivity {
                         pin = Integer.parseInt(gamePin.getText().toString());
                         client = new Client(activity, nameText.getText().toString(), pin, false);
                         //this is where the client should try to connect to the server, if the client can't connect, throw an exception
-                        client.start();
+                        uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
+                            @Override
+                            public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
+                                gamePin.setText("");
+                                gamePin.setHintTextColor(getResources().getColor(R.color.light_red));
+                                gamePin.setHint("Invalid Pin");
+                            }
+                        };
+                        Thread thread = new Thread(client);
+                        thread.start();
                         //the client will then change the screen to game_start_screen
-                    } catch (NumberFormatException e) {
+                    } catch (Exception e) {
                         //if the provided pin isn't a number, make the editText field blank
                         gamePin.setText("");
                         gamePin.setHintTextColor(getResources().getColor(R.color.light_red));

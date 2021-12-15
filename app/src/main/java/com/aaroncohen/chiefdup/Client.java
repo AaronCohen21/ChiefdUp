@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
+import java.util.ArrayList;
 
 public class Client extends Thread {
 
@@ -154,87 +155,132 @@ public class Client extends Thread {
     ========
      */
 
-    @Override
-    public void run() {
-        if (this.isHost) {
-            //start the server and create all 7 player sockets
-            class PlayerSocket implements Runnable {
+    class PlayerSocket implements Runnable {
 
-                public ServerSocket socket;
-                public Socket client;
+        public ServerSocket socket;
+        public Socket client;
 
-                DataInputStream dataIn;
-                DataOutputStream dataOut;
+        public boolean serverRunning;
 
-                @Override
-                public void run() {
-                    try {
-                        //create the socket
-                        socket = new ServerSocket(pin);
-                        client = socket.accept();
+        DataInputStream dataIn;
+        DataOutputStream dataOut;
 
-                        DataInputStream dataIn = new DataInputStream(client.getInputStream());
-                        DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
-
-                        boolean serverRunning = true;
-
-                        while (serverRunning) {
-                            byte protocol = dataIn.readByte();
-                            switch (protocol) {
-                                case 0:
-                                    //disconnect the client
-                                    serverRunning = false;
-                                    break;
-                                case 1:
-                                    //send the client's name
-
-                            }
-                        }
-
-                        //close the server tgread
-                        dataIn.close();
-                        socket.close();
-                        client.close();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } else {
-            //connect to the server as the client
+        @Override
+        public void run() {
             try {
-                Socket server = new Socket("localhost", pin);
+                //create the socket
+                socket = new ServerSocket(pin);
+                client = socket.accept();
 
-                DataInputStream dataIn = new DataInputStream(server.getInputStream());
-                DataOutputStream dataOut = new DataOutputStream(server.getOutputStream());
+                DataInputStream dataIn = new DataInputStream(client.getInputStream());
+                DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
 
-                String in = "", out = "";
+                serverRunning = true;
 
-                boolean clientRunning = true;
-
-                while (clientRunning) {
+                while (serverRunning) {
                     byte protocol = dataIn.readByte();
-
                     switch (protocol) {
                         case 0:
-                            //kick the client
-                            clientRunning = false;
+                            //establish or disconnect the client
+                            serverRunning = dataIn.readUTF().equals("Chief'd Up!"); //if the sent String is from a chief'd up client then set up the server, else disconnect
+
+                            if (serverRunning) {
+                                dataOut.writeChars("Chief'd Up!");
+                                dataOut.flush();
+                            }
+
                             break;
                         case 1:
-                            //move to game_start_screen with array of playerNames
-                            activity.gameStartScreen();
-                            break;
+                            //send the client name array
+
                     }
                 }
 
-                //close the client
-                dataOut.close();
-                server.close();
+                //close the server thread
+                dataIn.close();
+                socket.close();
+                client.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    ArrayList<PlayerSocket> playerSocketArrayList;
+    private int connectedPlayers;
+    private boolean clientRunning;
+
+    @Override
+    public void run() {
+        this.setUncaughtExceptionHandler(activity.uncaughtExceptionHandler);
+        if (this.isHost) {
+            connectedPlayers = 0;
+
+            //start the server and create all 7 player sockets
+            playerSocketArrayList = new ArrayList<>();
+            for (int i = 0; i < 7; i++) {
+                PlayerSocket playerSocket = new PlayerSocket();
+                playerSocketArrayList.add(playerSocket);
+                Thread playerThread = new Thread(playerSocket);
+                //start the thread armada
+                playerThread.start();
+            }
+
+        } else {
+            class ClientSocket implements Runnable {
+                @Override
+                public void run() {
+
+                    //connect to the server as the client
+                    Socket server = null;
+                    try {
+                        server = new Socket("localhost", pin);
+
+                        DataInputStream dataIn = new DataInputStream(server.getInputStream());
+                        DataOutputStream dataOut = new DataOutputStream(server.getOutputStream());
+
+                        String in = "", out = "";
+
+                        clientRunning = true;
+
+                        //establish a connection with the server
+                        dataOut.writeByte(0);
+                        dataOut.writeChars("Chief'd Up!");
+                        dataOut.flush();
+
+                        //make sure the server is a chief'd up server
+                        clientRunning = dataIn.readUTF().
+
+                                equals("Chief'd Up!");
+
+                        while (clientRunning) {
+                            byte protocol = dataIn.readByte();
+
+                            switch (protocol) {
+                                case 0:
+                                    //kick the client
+                                    clientRunning = false;
+                                    break;
+                                case 1:
+                                    //move to game_start_screen with array of playerNames
+                                    activity.gameStartScreen();
+                                    break;
+                            }
+                        }
+
+                        //close the client
+                        dataOut.close();
+                        server.close();
+                    } catch (Exception e) {
+                        throw new RuntimeException();
+                    }
+                }
+            }
+            ClientSocket clientSocket = new ClientSocket();
+            Thread thread = new Thread(clientSocket);
+            thread.setUncaughtExceptionHandler(activity.uncaughtExceptionHandler);
+            thread.start();
         }
     }
 }
