@@ -16,4 +16,5 @@
     <color name="blue">#0000FF</color>
     <color name="purple">#4B0082</color>
     <color name="brown">#964B00</color>
+    <color name="default_text">#8a000000</color>
 </resources>

@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         int pin;
                         pin = Integer.parseInt(gamePin.getText().toString());
                         client = new Client(activity, nameText.getText().toString(), pin, false);
-                        //this is where the client should try to connect to the server, if the client can't connect, throw an exception
+                        //this is where the client should try to connect to the server, if the client can't connect, the thread will throw an exception
                         uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
                             @Override
                             public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
@@ -167,8 +167,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Kick Button ViewGroups and Views for Client to access
+    ViewGroup kick2Group, kick3Group, kick4Group, kick5Group, kick6Group, kick7Group, kick8Group;
+    FloatingActionButton kickPlayer2Button, kickPlayer3Button, kickPlayer4Button, kickPlayer5Button, kickPlayer6Button, kickPlayer7Button, kickPlayer8Button;
+
     public void gameStartScreen() {
         setContentView(R.layout.game_start_screen);
+
+        //change the client's uncaught exception handler to boot back to the homescreen if there is an error
+        uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
+                mainScreen();
+                Button joinGameButton = findViewById(R.id.joinButton);
+                AlertDialog.Builder builder = new AlertDialog.Builder(joinGameButton.getContext());
+                builder.setMessage("Error: Disconnected").setPositiveButton("Ok", null).show();
+            }
+        };
 
         TextView title = findViewById(R.id.gameTitle);
         title.setText("Game: " + client.pin());
@@ -237,68 +252,75 @@ public class MainActivity extends AppCompatActivity {
         ==================================
          */
 
-        FloatingActionButton kickPlayer2Button = findViewById(R.id.kickPlayer2Button);
+        kickPlayer2Button = findViewById(R.id.kickPlayer2Button);
         kickPlayer2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client.kickPlayer(0);
+            }
+        });
+        kick2Group = ((ViewGroup) kickPlayer2Button.getParent());
+        kick2Group.removeView(kickPlayer2Button);
+
+        kickPlayer3Button = findViewById(R.id.kickPlayer3Button);
+        kickPlayer3Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 client.kickPlayer(1);
             }
         });
-        ((ViewGroup) kickPlayer2Button.getParent()).removeView(kickPlayer2Button);
+        kick3Group = ((ViewGroup) kickPlayer3Button.getParent());
+        kick3Group.removeView(kickPlayer3Button);
 
-        FloatingActionButton kickPlayer3Button = findViewById(R.id.kickPlayer3Button);
-        kickPlayer3Button.setOnClickListener(new View.OnClickListener() {
+        kickPlayer4Button = findViewById(R.id.kickPlayer4Button);
+        kickPlayer4Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 client.kickPlayer(2);
             }
         });
-        ((ViewGroup) kickPlayer3Button.getParent()).removeView(kickPlayer3Button);
+        kick4Group = ((ViewGroup) kickPlayer4Button.getParent());
+        kick4Group.removeView(kickPlayer4Button);
 
-        FloatingActionButton kickPlayer4Button = findViewById(R.id.kickPlayer4Button);
-        kickPlayer4Button.setOnClickListener(new View.OnClickListener() {
+        kickPlayer5Button = findViewById(R.id.kickPlayer5Button);
+        kickPlayer5Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 client.kickPlayer(3);
             }
         });
-        ((ViewGroup) kickPlayer4Button.getParent()).removeView(kickPlayer4Button);
+        kick5Group = ((ViewGroup) kickPlayer5Button.getParent());
+        kick5Group.removeView(kickPlayer5Button);
 
-        FloatingActionButton kickPlayer5Button = findViewById(R.id.kickPlayer5Button);
-        kickPlayer5Button.setOnClickListener(new View.OnClickListener() {
+        kickPlayer6Button = findViewById(R.id.kickPlayer6Button);
+        kickPlayer6Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 client.kickPlayer(4);
             }
         });
-        ((ViewGroup) kickPlayer5Button.getParent()).removeView(kickPlayer5Button);
+        kick6Group = ((ViewGroup) kickPlayer6Button.getParent());
+        kick6Group.removeView(kickPlayer6Button);
 
-        FloatingActionButton kickPlayer6Button = findViewById(R.id.kickPlayer6Button);
-        kickPlayer6Button.setOnClickListener(new View.OnClickListener() {
+        kickPlayer7Button = findViewById(R.id.kickPlayer7Button);
+        kickPlayer7Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 client.kickPlayer(5);
             }
         });
-        ((ViewGroup) kickPlayer6Button.getParent()).removeView(kickPlayer6Button);
+        kick7Group = ((ViewGroup) kickPlayer7Button.getParent());
+        kick7Group.removeView(kickPlayer7Button);
 
-        FloatingActionButton kickPlayer7Button = findViewById(R.id.kickPlayer7Button);
-        kickPlayer7Button.setOnClickListener(new View.OnClickListener() {
+        kickPlayer8Button = findViewById(R.id.kickPlayer8Button);
+        kickPlayer8Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 client.kickPlayer(6);
             }
         });
-        ((ViewGroup) kickPlayer7Button.getParent()).removeView(kickPlayer7Button);
-
-        FloatingActionButton kickPlayer8Button = findViewById(R.id.kickPlayer8Button);
-        kickPlayer8Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                client.kickPlayer(7);
-            }
-        });
-        ((ViewGroup) kickPlayer8Button.getParent()).removeView(kickPlayer8Button);
+        kick8Group = ((ViewGroup) kickPlayer8Button.getParent());
+        kick8Group.removeView(kickPlayer8Button);
 
         /*
         ============================
@@ -329,9 +351,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 //disconnect the client
                                 client.disconnect();
-
-                                //go to main menu
-                                mainScreen();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
