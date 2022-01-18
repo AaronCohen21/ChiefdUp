@@ -183,7 +183,7 @@ public class Client extends Thread {
 
         //remove the player from the playerSocketArrayList and start up a new player in its place
         playerSocketArrayList.remove(playerToKick);
-        playerNames.remove(playerNumber);
+        playerNames.remove(playerNumber + 1);
         //TODO figure out how to start up the new player
 
         //update player names on all the other clients
@@ -294,10 +294,13 @@ public class Client extends Thread {
                             dataOut.writeByte(1);
                             dataOut.flush();
 
-                            //update the client's name list
-                            dataOut.writeByte(2);
-                            dataOut.writeUTF(playerNamesToSend);
-                            dataOut.flush();
+                            //update each client's name list
+                            for (PlayerSocket player : playerSocketArrayList) {
+                                DataOutputStream playerDataOut = new DataOutputStream(player.client.getOutputStream());
+                                playerDataOut.writeByte(2);
+                                playerDataOut.writeUTF(playerNamesToSend);
+                                playerDataOut.flush();
+                            }
                             break;
                     }
                 }
@@ -423,6 +426,12 @@ public class Client extends Thread {
                                     break;
                                 case 2:
                                     //receiving the player names and updating the game_start_screen name list
+                                    uiHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            activity.gameStartScreen();
+                                        }
+                                    });
                                     String[] playerNames = dataIn.readUTF().split("\n");
                                     for (int i = 0; i < playerNames.length; i++) {
                                         int index = i;
@@ -456,8 +465,8 @@ public class Client extends Thread {
         }
     }
 
-    private void setPlayerNameDisplay(int connectedPlayers, String playerName, boolean isHost, @ColorInt int color) {
-        switch (connectedPlayers) {
+    private void setPlayerNameDisplay(int playerNumber, String playerName, boolean isHost, @ColorInt int color) {
+        switch (playerNumber) {
             case 0:
                 TextView playerOneName = activity.findViewById(R.id.playerOneName);
                 playerOneName.setText(playerName);
