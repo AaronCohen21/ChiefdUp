@@ -202,7 +202,9 @@ public class MainActivity extends AppCompatActivity {
          */
 
         TextView roundsText = findViewById(R.id.roundsNumberText);
+        roundsText.setText("Rounds: " + client.getRounds());
         TextView timeText = findViewById(R.id.drawingTimeText);
+        timeText.setText("Drawing Time: " + client.getTime());
 
         /*
         =====================

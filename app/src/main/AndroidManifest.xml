@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiefdUp">
-        <activity android:name=".MainActivity" android:screenOrientation="userLandscape">
+        <activity android:name=".MainActivity" android:screenOrientation="userLandscape"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
