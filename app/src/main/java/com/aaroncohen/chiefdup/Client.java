@@ -1,6 +1,7 @@
 package com.aaroncohen.chiefdup;
 
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.ColorInt;
@@ -75,6 +76,8 @@ public class Client extends Thread {
                 //do nothing
             }
             this.pin = portMaker.getPin();
+            //log the pin to information for it to be picked up by PortSetup.py
+            Log.i("GAMEPIN", "" + this.pin);
         } else {
             this.pin = pin;
         }
