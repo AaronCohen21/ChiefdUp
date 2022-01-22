@@ -1,17 +1,10 @@
 package com.aaroncohen.chiefdup;
 
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.ColorInt;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
